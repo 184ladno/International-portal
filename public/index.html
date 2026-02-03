@@ -12,11 +12,47 @@
     <h1>Welcome to International Portal</h1>
     <nav>
       <a href="/">Home</a>
+      <div class="dropdown">
+        <button class="dropdown-btn">Dashboard ▼</button>
+        <div class="dropdown-content">
+          <a href="#travel">Travel</a>
+          <a href="#schedule">Schedule</a>
+          <a href="#preparation">Preparation</a>
+          <a href="#journal">Journal</a>
+        </div>
+      </div>
       <a href="/login">Login</a>
     </nav>
   </header>
   <main>
     <p>This is the home page. Please login to access the portal.</p>
   </main>
+
+  <script>
+    // Dropdown functionality
+    const dropdownBtns = document.querySelectorAll('.dropdown-btn');
+    
+    dropdownBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.classList.toggle('active');
+        const content = this.nextElementSibling;
+        if (content.style.display === 'block') {
+          content.style.display = 'none';
+        } else {
+          content.style.display = 'block';
+        }
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!event.target.matches('.dropdown-btn')) {
+        dropdownBtns.forEach(btn => {
+          btn.classList.remove('active');
+          btn.nextElementSibling.style.display = 'none';
+        });
+      }
+    });
+  </script>
 </body>
 </html>
