@@ -15,8 +15,77 @@
     </nav>
   </header>
   <main>
-    <p>Welcome to your dashboard! You are logged in.</p>
-    <!-- Add more content here -->
+    <h2>Welcome to your dashboard!</h2>
+    <p>You are logged in.</p>
+    
+    <div class="dashboard-dropdowns">
+      <!-- Dropdown 1 -->
+      <div class="dropdown">
+        <button class="dropdown-btn">Reports ▼</button>
+        <div class="dropdown-content">
+          <a href="#sales-report">Sales Report</a>
+          <a href="#inventory-report">Inventory Report</a>
+          <a href="#analytics-report">Analytics Report</a>
+        </div>
+      </div>
+
+      <!-- Dropdown 2 -->
+      <div class="dropdown">
+        <button class="dropdown-btn">Settings ▼</button>
+        <div class="dropdown-content">
+          <a href="#profile">Profile Settings</a>
+          <a href="#notifications">Notification Preferences</a>
+          <a href="#security">Security Settings</a>
+        </div>
+      </div>
+
+      <!-- Dropdown 3 -->
+      <div class="dropdown">
+        <button class="dropdown-btn">Tools ▼</button>
+        <div class="dropdown-content">
+          <a href="#data-export">Data Export</a>
+          <a href="#backup">System Backup</a>
+          <a href="#integrations">Integrations</a>
+        </div>
+      </div>
+
+      <!-- Dropdown 4 -->
+      <div class="dropdown">
+        <button class="dropdown-btn">Help & Support ▼</button>
+        <div class="dropdown-content">
+          <a href="#documentation">Documentation</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact-support">Contact Support</a>
+        </div>
+      </div>
+    </div>
   </main>
+
+  <script>
+    // Dropdown functionality
+    const dropdownBtns = document.querySelectorAll('.dropdown-btn');
+    
+    dropdownBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.classList.toggle('active');
+        const content = this.nextElementSibling;
+        if (content.style.display === 'block') {
+          content.style.display = 'none';
+        } else {
+          content.style.display = 'block';
+        }
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!event.target.matches('.dropdown-btn')) {
+        dropdownBtns.forEach(btn => {
+          btn.classList.remove('active');
+          btn.nextElementSibling.style.display = 'none';
+        });
+      }
+    });
+  </script>
 </body>
 </html>
