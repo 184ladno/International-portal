@@ -21,11 +21,10 @@
           <a href="#journal">Journal</a>
         </div>
       </div>
-      <a href="/login">Login</a>
-      <a href="/logout">Logout</a>
+      <a id="auth-btn" href="/login">Login</a>
     </nav>
   </header>
-  <main>
+  <main id="main-content" style="display:none">
     <h2>Welcome to your dashboard!</h2>
     <p>You are logged in.</p>
     
@@ -97,6 +96,29 @@
         });
       }
     });
+  </script>
+
+  <script>
+    // Toggle single login/logout button and main content based on server session
+    fetch('/auth-status')
+      .then(res => res.json())
+      .then(data => {
+        const btn = document.getElementById('auth-btn');
+        const main = document.getElementById('main-content');
+        if (btn) {
+          if (data.loggedIn) {
+            btn.textContent = 'Logout';
+            btn.href = '/logout';
+          } else {
+            btn.textContent = 'Login';
+            btn.href = '/login';
+          }
+        }
+        if (main) {
+          main.style.display = data.loggedIn ? 'block' : 'none';
+        }
+      })
+      .catch(err => console.error('auth-status error', err));
   </script>
 </body>
 </html>

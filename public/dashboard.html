@@ -20,7 +20,7 @@
           <a href="#journal">Journal</a>
         </div>
       </div>
-      <a href="/logout">Logout</a>
+      <a id="auth-btn" href="/logout">Logout</a>
     </nav>
   </header>
   <main>
@@ -95,6 +95,24 @@
         });
       }
     });
+  </script>
+
+  <script>
+    // Toggle single login/logout button based on server session
+    fetch('/auth-status')
+      .then(res => res.json())
+      .then(data => {
+        const btn = document.getElementById('auth-btn');
+        if (!btn) return;
+        if (data.loggedIn) {
+          btn.textContent = 'Logout';
+          btn.href = '/logout';
+        } else {
+          btn.textContent = 'Login';
+          btn.href = '/login';
+        }
+      })
+      .catch(err => console.error('auth-status error', err));
   </script>
 </body>
 </html>

@@ -35,11 +35,12 @@ const checkAuth = (req, res, next) => {
 
 // Routes
 app.get('/', (req, res) => {
-  if (req.session.loggedIn) {
-    res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
-  } else {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-  }
+  // Always serve the homepage; client will control visibility based on /auth-status
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/dashboard', checkAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
 
 app.get('/login', (req, res) => {
@@ -56,7 +57,7 @@ app.post('/login', (req, res) => {
   if (user && bcrypt.compareSync(password, user.password)) {
     req.session.loggedIn = true;
     req.session.username = username;
-    res.redirect('/');
+    res.redirect('/dashboard');
   } else {
     res.send('Invalid credentials. <a href="/login">Try again</a>');
   }
@@ -65,6 +66,11 @@ app.post('/login', (req, res) => {
 app.get('/logout', (req, res) => {
   req.session.destroy();
   res.redirect('/');
+});
+
+// Return authentication status for client-side UI
+app.get('/auth-status', (req, res) => {
+  res.json({ loggedIn: !!req.session.loggedIn, username: req.session.username || null });
 });
 
 app.listen(PORT, () => {
