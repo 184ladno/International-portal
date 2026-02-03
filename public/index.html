@@ -24,6 +24,9 @@
       <a id="auth-btn" href="/login">Login</a>
     </nav>
   </header>
+  <div id="logged-out-message" style="display:block; text-align:center; margin-top:50px;">
+    <h2>You are logged out. Please login.</h2>
+  </div>
   <main id="main-content" style="display:none">
     <h2>Welcome to your dashboard!</h2>
     <p>You are logged in.</p>
@@ -105,6 +108,7 @@
       .then(data => {
         const btn = document.getElementById('auth-btn');
         const main = document.getElementById('main-content');
+        const message = document.getElementById('logged-out-message');
         if (btn) {
           if (data.loggedIn) {
             btn.textContent = 'Logout';
@@ -116,6 +120,9 @@
         }
         if (main) {
           main.style.display = data.loggedIn ? 'block' : 'none';
+        }
+        if (message) {
+          message.style.display = data.loggedIn ? 'none' : 'block';
         }
       })
       .catch(err => console.error('auth-status error', err));
