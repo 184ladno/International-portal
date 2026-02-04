@@ -170,7 +170,7 @@ button:hover {
 }
 
 .dropdown-content a {
-  color: #white;
+  color: white;
   padding: 0.75rem 1.5rem;
   text-decoration: none;
   display: block;
@@ -179,5 +179,12 @@ button:hover {
 
 .dropdown-content a:hover {
   background-color: #00A5CB;
+}
+
+video {
+  width: 100%;
+  height: auto;
+  max-height: 100vh;
+  object-fit: cover;
 }
 
