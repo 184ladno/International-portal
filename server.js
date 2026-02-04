@@ -14,7 +14,6 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Simple in-memory user store (replace with database in production)
 const users = [
@@ -35,8 +34,11 @@ const checkAuth = (req, res, next) => {
 
 // Routes
 app.get('/', (req, res) => {
-  // Always serve the homepage; client will control visibility based on /auth-status
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  if (req.session.loggedIn) {
+    res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
+  } else {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  }
 });
 
 app.get('/dashboard', checkAuth, (req, res) => {
@@ -57,7 +59,7 @@ app.post('/login', (req, res) => {
   if (user && bcrypt.compareSync(password, user.password)) {
     req.session.loggedIn = true;
     req.session.username = username;
-    res.redirect('/dashboard');
+    res.redirect('/');
   } else {
     res.send('Invalid credentials. <a href="/login">Try again</a>');
   }
@@ -67,6 +69,8 @@ app.get('/logout', (req, res) => {
   req.session.destroy();
   res.redirect('/');
 });
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Return authentication status for client-side UI
 app.get('/auth-status', (req, res) => {
