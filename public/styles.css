@@ -188,3 +188,54 @@ video {
   object-fit: cover;
 }
 
+.travel-h1 {
+  font-size: 2.5rem;
+  margin-top: 5rem;
+  padding-left: 8rem;
+}
+
+.travel-p {
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  padding-left: 8rem;
+  padding-right: 8rem;
+}
+
+.preparation-h1 {
+  font-size: 2.5rem;
+  margin-top: 5rem;
+  padding-left: 8rem;
+}
+
+.preparation-p {
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  padding-left: 8rem;
+  padding-right: 8rem;
+}
+
+.schedule-h1 {
+  font-size: 2.5rem;
+  margin-top: 5rem;
+  padding-left: 8rem;
+}
+
+.schedule-p {
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  padding-left: 8rem;
+  padding-right: 8rem;
+}
+
+.journal-h1 {
+  font-size: 2.5rem;
+  margin-top: 5rem;
+  padding-left: 8rem;
+}
+
+.journal-p {
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  padding-left: 8rem;
+  padding-right: 8rem;
+}
