@@ -1,11 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to International Portal</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <header>
+    <img src="LC Logo.JPG" alt="Portal Logo" height="50">
+    <h1>Welcome to International Portal</h1>
+    <nav>
+      <a href="/">Home</a>
+      <div class="dropdown">
+        <button class="dropdown-btn">Dashboard ▼</button>
+        <div class="dropdown-content">
+          <a href="travel">Travel</a>
+          <a href="/schedule">Schedule</a>
+          <a href="/preparation">Preparation</a>
+          <a href="/journal">Journal</a>
+        </div>
+      </div>
+      <a id="auth-btn" href="/logout">Logout</a>
+    </nav>
+  </header>
+  <script>
+    // Dropdown functionality
+    const dropdownBtns = document.querySelectorAll('.dropdown-btn');
     
-</body>
+    dropdownBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.classList.toggle('active');
+        const content = this.nextElementSibling;
+        if (content.style.display === 'block') {
+          content.style.display = 'none';
+        } else {
+          content.style.display = 'block';
+        }
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!event.target.matches('.dropdown-btn')) {
+        dropdownBtns.forEach(btn => {
+          btn.classList.remove('active');
+          btn.nextElementSibling.style.display = 'none';
+        });
+      }
+    });
+  </script>
+
+  <script>
+    // Toggle single login/logout button based on server session
+    fetch('/auth-status')
+      .then(res => res.json())
+      .then(data => {
+        const btn = document.getElementById('auth-btn');
+        if (!btn) return;
+        if (data.loggedIn) {
+          btn.textContent = 'Logout';
+          btn.href = '/logout';
+        } else {
+          btn.textContent = 'Login';
+          btn.href = '/login';
+        }
+      })
+      .catch(err => console.error('auth-status error', err));
+  </script>
+  </body>
 </html>
