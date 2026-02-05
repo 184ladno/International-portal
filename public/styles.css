@@ -240,6 +240,40 @@ video {
   padding-right: 8rem;
 }
 
+body {
+    font-family: Arial;
+    background: #f4f4f4;
+    }
+
+.cards {
+  display: flex;
+  gap: 20px;
+  padding: 40px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  width: 200px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card:hover {
+  background: #2563eb;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+.card.active .hidden {
+  display: block;
+}
+
+                                
 .cards img{
   height: 100px;
   width: auto;

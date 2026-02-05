@@ -80,7 +80,3 @@ app.get('/auth-status', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
-
-function toggle(card) {
-  card.classList.toggle("active")
-}
