@@ -247,14 +247,14 @@ body {
 
 .cards {
   display: flex;
-  gap: 20px;
-  padding: 40px;
+  gap: 80px;
+  padding-left:8rem ;
 }
 
 .card {
   background: white;
-  padding: 20px;
-  width: 200px;
+  padding: 10px;
+  width: 300px;
   border-radius: 10px;
   cursor: pointer;
   transition: 0.3s;
@@ -275,7 +275,7 @@ body {
 
                                 
 .cards img{
-  height: 100px;
-  width: auto;
+  height: 200px;
+  width: 300px;
   object-fit: cover;
 }
